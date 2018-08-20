@@ -1,8 +1,11 @@
-import 'package:flut_store/CarouselDemo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import './CarouselDemo.dart';
+import '../utils/resources.dart';
 
 class FlutStoreHome extends StatefulWidget {
+  List cart = new List();
+
   @override
   _FlutStoreState createState() => new _FlutStoreState();
 }
@@ -11,111 +14,89 @@ class _FlutStoreState extends State<FlutStoreHome> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      backgroundColor: Colors.white,
-      appBar: new AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.blueGrey[900],
-        elevation: 0.0,
-        title: new Text('FlutStore', style: new TextStyle(
-            color: Colors.white,
-            fontStyle: FontStyle.normal,
-            fontFamily: 'Billabong',
-            fontSize: 29.0)),
-        //App title with left padding
-
-        iconTheme: new IconThemeData(color: Colors.white),
-        actions: <Widget>[
-          new IconButton(icon: new Icon(Icons.notifications), onPressed: () {
-            Navigator.of(context).pushNamed("/electronics");
-          }),
-          new IconButton(
-              icon: new Icon(Icons.add_shopping_cart), onPressed: () {
-            Navigator.of(context).pushNamed("/notifications");
-          }),
-
-        ],
-      ), //AppBar
-      drawer: new Drawer(
-        child: new ListView(
+        backgroundColor: Colors.white,
+        appBar: getAppbar(context),//AppBar
+        drawer: new Drawer(
+          child: new ListView(
+            children: <Widget>[
+              new UserAccountsDrawerHeader(
+                decoration: BoxDecoration(color: Colors.blueGrey[900]),
+                accountName: new Text('Pranav Kapoor', style: new TextStyle(
+                    fontSize: 18.0, fontWeight: FontWeight.bold)),
+                accountEmail: new Text('pranavkapoorr@gmail.com',
+                    style: new TextStyle(
+                        fontSize: 15.0, fontWeight: FontWeight.normal)),
+                currentAccountPicture: new CircleAvatar(
+                  backgroundColor: Colors.black45,
+                  child: new Icon(
+                    Icons.account_circle, size: 50.0, color: Colors.white,),
+                ), //Circle Avatar
+              ), //UserAccount drawer header parent box
+              new Divider(
+                  height: defaultTargetPlatform == TargetPlatform.iOS ? 5.0 : 0.0,
+                  color: defaultTargetPlatform == TargetPlatform.iOS
+                      ? Colors.grey
+                      : Colors.white), //
+              new ListTile(
+                title: new Text('Electronics'),
+                leading: new Icon(Icons.phone_iphone),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pushNamed("/a");
+                },
+              ), //List Tile 1
+              new ListTile(
+                title: new Text('Lifestyle'),
+                leading: new Icon(Icons.face),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pushNamed("/b");
+                },
+              ), //List Tile 2
+              new ListTile(
+                title: new Text('TVs and Appliances'),
+                leading: new Icon(Icons.home),
+              ), //List Tile 3
+              new ListTile(
+                title: new Text('Sports, Books & More'),
+                leading: new Icon(Icons.store),
+              ), //List 4
+              new ListTile(
+                title: new Text('Offer Zone'),
+                leading: new Icon(Icons.local_offer),
+              ), //List Tile 5
+              new ListTile(
+                title: new Text('My Cart'),
+                leading: new Icon(Icons.shopping_cart),
+              ), //List Tile 6
+              new ListTile(
+                title: new Text('My Wishlist'),
+                leading: new Icon(Icons.favorite),
+              ), //List Tile 7
+              new ListTile(
+                title: new Text('My Orders'),
+                leading: new Icon(Icons.account_balance_wallet),
+              ), //List Tile 8
+              new ListTile(
+                title: new Text('My Account'),
+                leading: new Icon(Icons.account_box),
+              ), //List Tile 9
+              new ListTile(
+                title: new Text('About us'),
+                leading: new Icon(Icons.info),
+              ), //List Tile 10
+            ],
+          ), //parent ListView
+        ), //parent Drawer
+        body: new Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            new UserAccountsDrawerHeader(
-              decoration: BoxDecoration(color: Colors.blueGrey[900]),
-              accountName: new Text('Pranav Kapoor', style: new TextStyle(
-                  fontSize: 18.0, fontWeight: FontWeight.bold)),
-              accountEmail: new Text('pranavkapoorr@gmail.com',
-                  style: new TextStyle(
-                      fontSize: 15.0, fontWeight: FontWeight.normal)),
-              currentAccountPicture: new CircleAvatar(
-                backgroundColor: Colors.black45,
-                child: new Icon(
-                  Icons.account_circle, size: 50.0, color: Colors.white,),
-              ), //Circle Avatar
-            ), //UserAccount drawer header parent box
-            new Divider(
-                height: defaultTargetPlatform == TargetPlatform.iOS ? 5.0 : 0.0,
-                color: defaultTargetPlatform == TargetPlatform.iOS
-                    ? Colors.grey
-                    : Colors.white), //
-            new ListTile(
-              title: new Text('Electronics'),
-              leading: new Icon(Icons.phone_iphone),
-              onTap: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).pushNamed("/a");
-              },
-            ), //List Tile 1
-            new ListTile(
-              title: new Text('Lifestyle'),
-              leading: new Icon(Icons.face),
-              onTap: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).pushNamed("/b");
-              },
-            ), //List Tile 2
-            new ListTile(
-              title: new Text('TVs and Appliances'),
-              leading: new Icon(Icons.home),
-            ), //List Tile 3
-            new ListTile(
-              title: new Text('Sports, Books & More'),
-              leading: new Icon(Icons.store),
-            ), //List 4
-            new ListTile(
-              title: new Text('Offer Zone'),
-              leading: new Icon(Icons.local_offer),
-            ), //List Tile 5
-            new ListTile(
-              title: new Text('My Cart'),
-              leading: new Icon(Icons.shopping_cart),
-            ), //List Tile 6
-            new ListTile(
-              title: new Text('My Wishlist'),
-              leading: new Icon(Icons.favorite),
-            ), //List Tile 7
-            new ListTile(
-              title: new Text('My Orders'),
-              leading: new Icon(Icons.account_balance_wallet),
-            ), //List Tile 8
-            new ListTile(
-              title: new Text('My Account'),
-              leading: new Icon(Icons.account_box),
-            ), //List Tile 9
-            new ListTile(
-              title: new Text('About us'),
-              leading: new Icon(Icons.info),
-            ), //List Tile 10
+            _searchBar(context),
+            new Flexible(
+              child: _feed(context),
+            ),
           ],
-        ), //parent ListView
-      ), //parent Drawer
-      body: new Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
-        _searchBar(context),
-        new Flexible(
-          child: _feed(context),
-        ),
-      ],
-    )
+        )
     ); //Scaffold
   }
   Widget _searchBar(BuildContext context){
@@ -165,9 +146,9 @@ class _FlutStoreState extends State<FlutStoreHome> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               new Flexible(child: new Container(height: 170.0, child: new CarouselDemo(), color: Colors.white)),
-              new Flexible(child: new Container(height: 300.0,
+              new Flexible(child: new Container(height: 400.0,
                   color: Colors.blueGrey[600],
-                  child: _dealsOfDay(deviceSize),
+                  child: dealsOfDayGrid("New Arrivals",deviceSize),
                   margin: new EdgeInsets.only(top: 8.0))),
 
               new Flexible(child: new Container(height: 250.0,
@@ -335,28 +316,29 @@ class _FlutStoreState extends State<FlutStoreHome> {
                       ],
                     ),
                   ),
-                  new Padding(
-                      padding: new EdgeInsets.only(bottom: 8.0, right: 10.0),
-                      child: new RaisedButton(color: Colors.white,
-                        onPressed: () {},
-                        shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(4.0)),
-                        textColor: Colors.black,
-                        child: new Text("View All"),
-                      )
+                  Padding(
+                    padding: new EdgeInsets.only(bottom: 8.0, right: 10.0),
+                    child: new RaisedButton(
+                      color: Colors.white,
+                      onPressed: () {},
+                      shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(4.0)),
+                      textColor: Colors.black,
+                      child: new Text("View All"),
+                    ),
                   ),
                 ],
               )), //row ends (text and button)
-
           new Container(
             color: Colors.white, width: deviceSize.width, height: 220.0,
             child: new ListView (
+              padding: EdgeInsets.only(top: 10.0),
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               children: <Widget>[
-
                 //list item 1
-                new Container(width: 130.0,
+                new Container(
+                  width: 130.0,
                   child: new FlatButton(
                       onPressed: () {},
                       padding: new EdgeInsets.only(top: 10.0),
@@ -456,6 +438,7 @@ class _FlutStoreState extends State<FlutStoreHome> {
       ), //parent column
     );
   }
+
 }
 
 

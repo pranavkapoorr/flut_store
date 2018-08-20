@@ -10,11 +10,10 @@ final List<String> imgList = [
 ];
 
 class CarouselDemo extends StatelessWidget {
-  CarouselSlider instance;
 
   @override
   Widget build(BuildContext context) {
-    instance = new CarouselSlider(
+    CarouselSlider instance = new CarouselSlider(
       items: imgList.map((url) {
         return new Container(
           margin: new EdgeInsets.symmetric(horizontal: 4.0),
