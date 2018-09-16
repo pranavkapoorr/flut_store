@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import './CarouselDemo.dart';
+import './SearchScreen.dart';
 import '../utils/resources.dart';
 
 class FlutStoreHome extends StatefulWidget {
@@ -112,13 +113,13 @@ class _FlutStoreState extends State<FlutStoreHome> {
             margin: const EdgeInsets.all(10.0),
             child: new FlatButton(
               onPressed: () {
-                Navigator.of(context).pushNamed("/notifications");
+                Navigator.push(context, new MaterialPageRoute(builder: (context)=> new SearchScreen()));
               },
               color: Colors.white,
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  new Icon(Icons.search, size: 20.0),
+                  new Icon(Icons.search, size: 20.0,color: Colors.grey,),
                   new Text(' What are you looking for?',
                     style: new TextStyle(color: Colors.grey,
                         fontSize: 16.0,
