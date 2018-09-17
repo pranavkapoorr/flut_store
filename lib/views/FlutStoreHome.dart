@@ -1,5 +1,7 @@
+import 'package:flut_store/model/model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import './ProductScreen.dart';
 import './CarouselDemo.dart';
 import './SearchScreen.dart';
 import '../utils/resources.dart';
@@ -17,78 +19,7 @@ class _FlutStoreState extends State<FlutStoreHome> {
     return new Scaffold(
         backgroundColor: Colors.white,
         appBar: getAppbar(context),//AppBar
-        drawer: new Drawer(
-          child: new ListView(
-            children: <Widget>[
-              new UserAccountsDrawerHeader(
-                decoration: BoxDecoration(color: Colors.blueGrey[900]),
-                accountName: new Text('Pranav Kapoor', style: new TextStyle(
-                    fontSize: 18.0, fontWeight: FontWeight.bold)),
-                accountEmail: new Text('pranavkapoorr@gmail.com',
-                    style: new TextStyle(
-                        fontSize: 15.0, fontWeight: FontWeight.normal)),
-                currentAccountPicture: new CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: new Icon(
-                    Icons.account_circle, size: 50.0, color: Colors.white,),
-                ), //Circle Avatar
-              ), //UserAccount drawer header parent box
-              new Divider(
-                  height: defaultTargetPlatform == TargetPlatform.iOS ? 5.0 : 0.0,
-                  color: defaultTargetPlatform == TargetPlatform.iOS
-                      ? Colors.grey
-                      : Colors.white), //
-              new ListTile(
-                title: new Text('Electronics'),
-                leading: new Icon(Icons.phone_iphone),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).pushNamed("/a");
-                },
-              ), //List Tile 1
-              new ListTile(
-                title: new Text('Lifestyle'),
-                leading: new Icon(Icons.face),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).pushNamed("/b");
-                },
-              ), //List Tile 2
-              new ListTile(
-                title: new Text('TVs and Appliances'),
-                leading: new Icon(Icons.home),
-              ), //List Tile 3
-              new ListTile(
-                title: new Text('Sports, Books & More'),
-                leading: new Icon(Icons.store),
-              ), //List 4
-              new ListTile(
-                title: new Text('Offer Zone'),
-                leading: new Icon(Icons.local_offer),
-              ), //List Tile 5
-              new ListTile(
-                title: new Text('My Cart'),
-                leading: new Icon(Icons.shopping_cart),
-              ), //List Tile 6
-              new ListTile(
-                title: new Text('My Wishlist'),
-                leading: new Icon(Icons.favorite),
-              ), //List Tile 7
-              new ListTile(
-                title: new Text('My Orders'),
-                leading: new Icon(Icons.account_balance_wallet),
-              ), //List Tile 8
-              new ListTile(
-                title: new Text('My Account'),
-                leading: new Icon(Icons.account_box),
-              ), //List Tile 9
-              new ListTile(
-                title: new Text('About us'),
-                leading: new Icon(Icons.info),
-              ), //List Tile 10
-            ],
-          ), //parent ListView
-        ), //parent Drawer
+        drawer: _drawer(),
         body: new Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
@@ -99,6 +30,80 @@ class _FlutStoreState extends State<FlutStoreHome> {
           ],
         )
     ); //Scaffold
+  }
+  Widget _drawer(){
+    return new Drawer(
+      child: new ListView(
+        children: <Widget>[
+          new UserAccountsDrawerHeader(
+            decoration: BoxDecoration(color: Colors.blueGrey[900]),
+            accountName: new Text('Pranav Kapoor', style: new TextStyle(
+                fontSize: 18.0, fontWeight: FontWeight.bold)),
+            accountEmail: new Text('pranavkapoorr@gmail.com',
+                style: new TextStyle(
+                    fontSize: 15.0, fontWeight: FontWeight.normal)),
+            currentAccountPicture: new CircleAvatar(
+              backgroundColor: Colors.black45,
+              child: new Icon(
+                Icons.account_circle, size: 50.0, color: Colors.white,),
+            ), //Circle Avatar
+          ), //UserAccount drawer header parent box
+          new Divider(
+              height: defaultTargetPlatform == TargetPlatform.iOS ? 5.0 : 0.0,
+              color: defaultTargetPlatform == TargetPlatform.iOS
+                  ? Colors.grey
+                  : Colors.white), //
+          new ListTile(
+            title: new Text('Electronics'),
+            leading: new Icon(Icons.phone_iphone),
+            onTap: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pushNamed("/a");
+            },
+          ), //List Tile 1
+          new ListTile(
+            title: new Text('Lifestyle'),
+            leading: new Icon(Icons.face),
+            onTap: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pushNamed("/b");
+            },
+          ), //List Tile 2
+          new ListTile(
+            title: new Text('TVs and Appliances'),
+            leading: new Icon(Icons.home),
+          ), //List Tile 3
+          new ListTile(
+            title: new Text('Sports, Books & More'),
+            leading: new Icon(Icons.store),
+          ), //List 4
+          new ListTile(
+            title: new Text('Offer Zone'),
+            leading: new Icon(Icons.local_offer),
+          ), //List Tile 5
+          new ListTile(
+            title: new Text('My Cart'),
+            leading: new Icon(Icons.shopping_cart),
+          ), //List Tile 6
+          new ListTile(
+            title: new Text('My Wishlist'),
+            leading: new Icon(Icons.favorite),
+          ), //List Tile 7
+          new ListTile(
+            title: new Text('My Orders'),
+            leading: new Icon(Icons.account_balance_wallet),
+          ), //List Tile 8
+          new ListTile(
+            title: new Text('My Account'),
+            leading: new Icon(Icons.account_box),
+          ), //List Tile 9
+          new ListTile(
+            title: new Text('About us'),
+            leading: new Icon(Icons.info),
+          ), //List Tile 10
+        ],
+      ), //parent ListView
+    );
   }
   Widget _searchBar(BuildContext context){
     return new Container(color: Colors.blueGrey[900],
@@ -135,35 +140,33 @@ class _FlutStoreState extends State<FlutStoreHome> {
     var deviceSize = MediaQuery
         .of(context)
         .size;
-    return new ListView.builder(
-        itemCount: 2,
-        scrollDirection: Axis.vertical,
-        itemBuilder: (context, index) =>
-        index == 0
-            ? _categories(deviceSize)
-            : Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              new Flexible(child: new Container(height: 170.0, child: new CarouselDemo(), color: Colors.white)),
-              new Flexible(child: new Container(height: 400.0,
-                  color: Colors.blueGrey[600],
-                  child: dealsOfDayGrid("New Arrivals",deviceSize),
-                  margin: new EdgeInsets.only(top: 8.0))),
+    return new ListView(
+        children: <Widget>[
+          _categories(deviceSize),
+          Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                new Flexible(child: new Container(height: 170.0, child: new CarouselDemo(), color: Colors.white)),
+                new Flexible(child: new Container(height: 400.0,
+                    color: Colors.blueGrey[600],
+                    child: dealsOfDayGrid("New Arrivals",deviceSize),
+                    margin: new EdgeInsets.only(top: 8.0))),
 
-              new Flexible(child: new Container(height: 250.0,
-                  color: Colors.blueGrey[600],
-                  child: _singlePromotion(deviceSize),
-                  margin: new EdgeInsets.only(top: 8.0))),
+                new Flexible(child: new Container(height: 250.0,
+                    color: Colors.blueGrey[600],
+                    child: _singlePromotion(deviceSize),
+                    margin: new EdgeInsets.only(top: 8.0))),
 
-              new Flexible(child: new Container(height: 300.0,
-                  color: Colors.blueGrey[600],
-                  child: _dealsOfDay(deviceSize),
-                  margin: new EdgeInsets.only(top: 8.0))),
+                new Flexible(child: new Container(height: 300.0,
+                    color: Colors.blueGrey[600],
+                    child: _dealsOfDay(deviceSize),
+                    margin: new EdgeInsets.only(top: 8.0))),
 
-            ]
-        )
+              ]
+          )
+        ]
     );
   }
 
@@ -332,107 +335,36 @@ class _FlutStoreState extends State<FlutStoreHome> {
               )), //row ends (text and button)
           new Container(
             color: Colors.white, width: deviceSize.width, height: 220.0,
-            child: new ListView (
+            child: new ListView.builder(
               padding: EdgeInsets.only(top: 10.0),
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
-              children: <Widget>[
-                //list item 1
-                new Container(
-                  width: 130.0,
-                  child: new FlatButton(
-                      onPressed: () {},
-                      padding: new EdgeInsets.only(top: 10.0),
-                      child: new Column(
-                        children: <Widget>[
-                          new Image.asset(
-                              "lib/assets/honor 10.png", height: 100.0,
-                              fit: BoxFit.fitWidth),
-                          new Padding(
-                              padding: new EdgeInsets.only(bottom: 4.0)),
-                          new Text("Honor 10", textAlign: TextAlign.center,
-                              style: new TextStyle(
-                                  color: Colors.black, fontSize: 13.0)),
-                          new Padding(
-                              padding: new EdgeInsets.only(bottom: 4.0)),
-                          new Text("6 GB RAM", textAlign: TextAlign.center,
-                              style: new TextStyle(
-                                  color: Colors.green, fontSize: 13.0)),
-                        ],
-                      )),
-                ), //list item 1
-
-                //list item 2
-                new Container(width: 130.0, child:
-                new FlatButton(
-                    onPressed: () {},
+              itemCount: products.length,
+              itemBuilder: (context,index) =>
+              new Container(
+                width: 130.0,
+                child: new FlatButton(
+                    onPressed: () { Navigator.push(context, new MaterialPageRoute(builder: (context)=>new ProductScreen(products[index])));},
                     padding: new EdgeInsets.only(top: 10.0),
                     child: new Column(
                       children: <Widget>[
                         new Image.asset(
-                            "lib/assets/iphone 6s.png", height: 100.0,
+                            products[index].pic, height: 100.0,
                             fit: BoxFit.fitWidth),
-                        new Padding(padding: new EdgeInsets.only(bottom: 4.0)),
-                        new Text(
-                            "iPhone 6s (32 GB)", textAlign: TextAlign.center,
+                        new Padding(
+                            padding: new EdgeInsets.only(bottom: 4.0)),
+                        new Text(products[index].name, textAlign: TextAlign.center,
                             style: new TextStyle(
                                 color: Colors.black, fontSize: 13.0)),
-                        new Padding(padding: new EdgeInsets.only(bottom: 4.0)),
-                        new Text(
-                            "12 MP | 5 MP Camera", textAlign: TextAlign.center,
+                        new Padding(
+                            padding: new EdgeInsets.only(bottom: 4.0)),
+                        new Text(products[index].price, textAlign: TextAlign.center,
                             style: new TextStyle(
                                 color: Colors.green, fontSize: 13.0)),
                       ],
-                    )),
-                ), //list item 2
-
-                //list item 3
-                new Container(width: 130.0, child:
-                new FlatButton(
-                    onPressed: () {},
-                    padding: new EdgeInsets.only(top: 10.0),
-                    child: new Column(
-                      children: <Widget>[
-                        new Image.asset(
-                            "lib/assets/iphone 8.png", height: 100.0,
-                            fit: BoxFit.fitWidth),
-                        new Padding(padding: new EdgeInsets.only(bottom: 4.0)),
-                        new Text(
-                            "iPhone 8 (256 GB)", textAlign: TextAlign.center,
-                            style: new TextStyle(
-                                color: Colors.black, fontSize: 13.0)),
-                        new Padding(padding: new EdgeInsets.only(bottom: 4.0)),
-                        new Text(
-                            "12 MP | 7 MP Camera", textAlign: TextAlign.center,
-                            style: new TextStyle(
-                                color: Colors.green, fontSize: 13.0)),
-                      ],
-                    )),
-                ), //list item 3
-
-                //list item 4
-                new Container(width: 130.0, child:
-                new FlatButton(
-                    onPressed: () {},
-                    padding: new EdgeInsets.only(top: 10.0),
-                    child: new Column(
-                      children: <Widget>[
-                        new Image.asset("lib/assets/oppo f7.png", height: 100.0,
-                            fit: BoxFit.fitWidth),
-                        new Padding(padding: new EdgeInsets.only(bottom: 4.0)),
-                        new Text(
-                            "OPPO F7(Red, 64 GB)", textAlign: TextAlign.center,
-                            style: new TextStyle(
-                                color: Colors.black, fontSize: 13.0)),
-                        new Padding(padding: new EdgeInsets.only(bottom: 4.0)),
-                        new Text(
-                            "16 MP | 25 MP Camera", textAlign: TextAlign.center,
-                            style: new TextStyle(
-                                color: Colors.green, fontSize: 13.0)),
-                      ],
-                    )),
-                ), //list item 4
-              ],
+                    )
+                ),
+              ),
             ),
           )
         ],
