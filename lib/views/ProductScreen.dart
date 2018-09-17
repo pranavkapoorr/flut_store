@@ -1,4 +1,5 @@
 import 'package:flut_store/model/model.dart';
+import 'package:flut_store/utils/resources.dart';
 import 'package:flutter/material.dart';
 
 class ProductScreen extends StatefulWidget{
@@ -24,8 +25,34 @@ class _ProductScreenState extends State<ProductScreen>{
 
               _mainCard(widget.product),
               _imagesCard(widget.product, deviceSize),
-              _descCard(widget.product)
+              _descCard(widget.product),
+              Container(
+                  height: 60.0,
+                  width: deviceSize.width,
+                  margin: EdgeInsets.all(10.0),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(2.0),
+                      gradient: LinearGradient(begin: AlignmentDirectional.bottomCenter,end: AlignmentDirectional.topCenter,colors: [Colors.yellow[600],Colors.yellow[500],Colors.yellow[200]])
+                  ),
+                  child: FlatButton(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text("Add to ",style: TextStyle(fontSize: 18.0),),
+                        Icon(Icons.add_shopping_cart)
+                      ],
+                    ),
+                    onPressed: (){
+                      setState(() {
+                        cart.add(widget.product);
 
+                      });
+
+                      Duration(seconds: 1);
+                      Navigator.pop(context);
+                      },
+                  )
+              )
 
             ],
           ),

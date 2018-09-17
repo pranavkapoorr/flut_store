@@ -151,7 +151,7 @@ class _FlutStoreState extends State<FlutStoreHome> {
                 new Flexible(child: new Container(height: 170.0, child: new CarouselDemo(), color: Colors.white)),
                 new Flexible(child: new Container(height: 400.0,
                     color: Colors.blueGrey[600],
-                    child: dealsOfDayGrid("New Arrivals",deviceSize),
+                    child: dealsOfDayGrid(deviceSize),
                     margin: new EdgeInsets.only(top: 8.0))),
 
                 new Flexible(child: new Container(height: 250.0,
@@ -167,6 +167,83 @@ class _FlutStoreState extends State<FlutStoreHome> {
               ]
           )
         ]
+    );
+  }
+  Widget dealsOfDayGrid(Size deviceSize){
+    return new Container(
+      height: 400.0,
+      width: deviceSize.width,
+      child: new Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          new Padding(padding: new EdgeInsets.only(top: 1.0, bottom: 6.0),
+              child: new Row(
+                children: [
+                  new Expanded(
+                    child: new Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        new Container(
+                            padding: const EdgeInsets.only(
+                                bottom: 8.0, left: 10.0),
+                            child: new Text(
+                                "New Arrivals", textAlign: TextAlign.start,
+                                style: new TextStyle(color: Colors.white,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold))
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: new EdgeInsets.only(bottom: 8.0, right: 10.0),
+                    child: new RaisedButton(
+                      color: Colors.white,
+                      onPressed: () {},
+                      shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(4.0)),
+                      textColor: Colors.black,
+                      child: new Text("View All"),
+                    ),
+                  ),
+                ],
+              )), //row ends (text and button)
+          new Container(
+            color: Colors.white, width: deviceSize.width, height: 320.0,
+            child: new GridView.builder (
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+              itemCount: products.length,
+              itemBuilder: (context,index) => new Container(
+                width: 130.0,
+                child: new FlatButton(
+                    onPressed: () {Navigator.push(context, new MaterialPageRoute(builder: (context)=>new ProductScreen(products[index])));},
+                    padding: new EdgeInsets.only(top: 5.0),
+                    child: new Column(
+                      children: <Widget>[
+                        new Image.asset(
+                            products[index].pic, height: 100.0,
+                            fit: BoxFit.fitWidth),
+                        new Padding(
+                            padding: new EdgeInsets.only(bottom: 2.0)),
+                        new Text(products[index].name, textAlign: TextAlign.center,
+                            style: new TextStyle(
+                                color: Colors.black, fontSize: 13.0)),
+                        new Padding(
+                            padding: new EdgeInsets.only(bottom: 2.0)),
+                        new Text(products[index].price, textAlign: TextAlign.center,
+                            style: new TextStyle(
+                                color: Colors.green, fontSize: 13.0)),
+                      ],
+                    )
+                ),
+              ),
+            ),
+          )
+        ],
+      ), //parent column
     );
   }
 
