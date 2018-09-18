@@ -39,6 +39,7 @@ class CartState extends State<Cart>{
     );
 
   }
+
   Widget _nonEmptyCart(){
     var deviceSize = MediaQuery.of(context).size;
     return Column(

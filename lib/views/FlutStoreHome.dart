@@ -1,4 +1,6 @@
 import 'package:flut_store/model/model.dart';
+import 'package:flut_store/views/AboutUs.dart';
+import 'package:flut_store/views/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import './ProductScreen.dart';
@@ -84,6 +86,7 @@ class _FlutStoreState extends State<FlutStoreHome> {
           new ListTile(
             title: new Text('My Cart'),
             leading: new Icon(Icons.shopping_cart),
+            onTap: ()=>Navigator.push(context, new MaterialPageRoute(builder: (context)=>new Cart())),
           ), //List Tile 6
           new ListTile(
             title: new Text('My Wishlist'),
@@ -97,10 +100,7 @@ class _FlutStoreState extends State<FlutStoreHome> {
             title: new Text('My Account'),
             leading: new Icon(Icons.account_box),
           ), //List Tile 9
-          new ListTile(
-            title: new Text('About us'),
-            leading: new Icon(Icons.info),
-          ), //List Tile 10
+          new AboutUs()
         ],
       ), //parent ListView
     );
